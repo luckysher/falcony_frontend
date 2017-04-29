@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+    <html ng-app="falcony">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="FalconyApp">
+
+        <!--angular js-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+
+        <!--bootstrap css/js -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+
+        <!--app css-->
+        <link rel="stylesheet" href="./css/falcony.css"/>
+        <title>
+            ProductsERP
+        </title>
+    </head>
+    <body>
+        <header>
+              <div class="col-sm-2 logo">
+                  <a href="#/login" style="text-decoration:none;">Falcony</a>
+              </div>
+              <div class="col-sm-10 subtitle">
+                   <h5>Front end for falcony rest api.......</h5>
+              </div>
+        </header>
+        <div class="jumbotron">
+
+            <!--nav class="navbar navbar-default">
+              <div class="container-fluid">
+                  <div class="navbar-header">
+
+                  </div>
+              </div>
+            </nav-->
+            <div class="container vert-offset-top-12">
+                 <ui-view></ui-view>
+            </div>
+        </div>
+
+        <!--app js-->
+        <script src="falcony.app.js"></script>
+        <script src="login/index.controller.js"></script>
+        <script src="home/index.controller.js"></script>
+    </body>
+</html>
