@@ -1,0 +1,27 @@
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="alert alert-info mgn-top-15">
+        Please enter username and password
+    </div>
+    <h2>Login</h2>
+    <form name="form" ng-submit="form.$valid && fal.login()" novalidate>
+        <div class="form-group spaced" ng-class="{'has-error': form.$submitted && form.username.$invalid }">
+            <input name="username" type="text" class="form-control ht-14-ext" placeholder="Enter username here.." ng-model="fal.username" required namecheck/>
+            <div ng-messages="form.$submitted && form.username.$error" class="mgn-top-5">
+                <div ng-message="required" class="alert alert-danger">Username is required</div>
+                <div ng-message="short" class="alert alert-danger">Username must be or more than 5 chars</div>
+            </div>
+        </div>
+        <div class="form-group spaced" ng-class="{'has-error' : form.$submitted && form.password.$invalid }">
+            <input type="passowrd" name="password" placeholder="Enter your password" ng-model="fal.password" class="form-control ht-14-ext" required passcheck/>
+            <div ng-messages="form.$submitted && form.password.$error" class="mgn-top-5">
+                <div ng-message="required" class="alert alert-danger">Password is required</div>
+                <div ng-message="digit" class="alert alert-danger">Password must be in digits </div>
+                <div ng-message="short" class="alert alert-danger">Password must be 8 chars long</div>
+            </div>
+        </div>
+        <div class="form-group">
+             <button type="submit" ng-disable="fal.loading" class="btn btn-primary">Login</button>
+             <div ng-if="fal.error" class="alert alert-danger">{{ fal.error }}</div>
+        </div>
+    </form>
+</div>
