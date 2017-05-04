@@ -2,10 +2,25 @@
     min-height:100vh;
     padding-top:2px;
 }
-.align-center{
-
+.container{
+    width:100%;
 }
-
+ nav li:hover{
+    background-color:#36424a;
+    color: #fffd63;
+}
+.navbar-default .navbar-nav > li{
+    background-color:#8a964c;
+}
+.navbar-default .navbar-nav > li > a{
+    color: #fffd63;
+}
+.navbar-default .navbar-nav > li > a:hover{
+    color: #fffd63;
+}
+.navbar-nav > li {
+    margin: 0px 8px 1px 1px;
+}
 header{
     background-color: #36424a;
     padding: 10px;
