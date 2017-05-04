@@ -1,20 +1,11 @@
 (function(){
     'use strict';
-
         angular
-            .module('falcony', ['ui.router', 'ngMessages'])
+            .module('falcony', ['ui.router', 'ngMessages', 'ngStorage'])
             .config(config)
             .run(run);
 
           function config($stateProvider, $httpProvider, $urlRouterProvider){
-             console.log('config log......');
-             // set headers value
-             $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
-             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-             $httpProvider.defaults.headers.useXDomain = true;
-             $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
-             $httpProvider.defaults.headers.common['Accept'] = 'application/json';
-
             // setting default route
             $urlRouterProvider.otherwise('/');
 
@@ -34,10 +25,19 @@
                         });
           }
 
-          function run($location, $window){
-                console.log("Running angular...");
-                $location.path('/login');
-                $window.currentUser = 'Lucky';
-                //console.log($localStorage);
+          function run($http, $rootScope, $location, $localStorage){
+                console.log("Current user>> : index " + JSON.stringify($localStorage.currentUser));
+                if ($localStorage.currentUser){
+                    $http.defaults.headers.common.Authorization = $localStorage.currentUser;
+                    // do not show the login page again
+                    $location.path('/');
+                }
+                $rootScope.$on('$locationChangeStart', function(event, next, current){
+                    var restricted_pages = ['/login']
+                    var restricted = restricted_pages.indexOf($location.path()) === -1;
+                    if (!$localStorage.currentUser && restricted){
+                        $location.path('/login');
+                    }
+                });
           }
 })();
