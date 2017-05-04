@@ -7,19 +7,46 @@
            .directive('passcheck', passcheck)
            .controller('Login.IndexController', Controller);
 
-          function Controller($location, $scope, $window){
+          function Controller($location, $scope, $http, $localStorage, AuthenticationService){
                 var fal = controller = this;
                 fal.login = login;
-
-                console.log("Current user : " + $window.currentUser);
+                console.log("Current user : " + $localStorage.currentUser);
 
                 function login(){
                            fal.loading = true;
-                           console.log('Username : ' + fal.username + 'Password : ' + fal.password);
-                           fal.loading = false;
-                           fal.error = "Error during login....";
-                }
+                           AuthenticationService.Login(fal.username, fal.password)
+                                .then(function success(response){
+                                            if (response.status == 200){
+                                                console.log('success.........')
+                                                var token =  angular.fromJson(response.data).data.token;
 
+                                                if(token === null){
+                                                    fal.error = 'user not authorized...';
+                                                } else{
+                                                        $localStorage.currentUser = {'username': fal.username, 'token': angular.fromJson(response.data).data.token }
+                                                       //show home page
+                                                       $location.path('/');
+                                         }
+                                }
+                           }, function error(response){
+                                console.log("error: " + angular.toJson(response.data));
+                                //set login error
+                                fal.error = "Error during login in. Please check the username and password....";
+                           });
+                           fal.loading = false;
+                }
+                function logout(){
+                           fal.loading = true;
+
+                           AuthenticationService.Logout(function(response){
+                                if (response == true){
+                                    // set login page
+                                    $location.path('/login');
+                                    console.log("user logged out successfully...");
+                                }
+                           });
+                           fal.loading = false;
+                }
           }
 
           function namecheck(){
@@ -33,8 +60,7 @@
                                     ngModel.$setValidity('short', true);
                             return name;
                         });
-                    }
-                };
+                    }};
           }
 
           function passcheck(){
@@ -51,6 +77,5 @@
                              return password
                         });
                     }
-                };
-          }
+                };}
 })();
