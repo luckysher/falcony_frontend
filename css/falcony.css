@@ -10,13 +10,15 @@
     color: #fffd63;
 }
 .navbar-default .navbar-nav > li{
-    background-color:#8a964c;
+    background-color:#0890a7;
 }
 .navbar-default .navbar-nav > li > a{
+    font-family: fontawesome;
     color: #fffd63;
 }
 .navbar-default .navbar-nav > li > a:hover{
     color: #fffd63;
+    background-color:#36424a;
 }
 .navbar-nav > li {
     margin: 0px 8px 1px 1px;
@@ -56,4 +58,17 @@ header{
 }
 .mgn-top-15{
     margin-top:15px;
+}
+.product{
+    margin:50px 20px 10px 20px;
+    font-family:fontawesome;
+}
+table thead{
+    color:Red;
+    background-color:black;
+}
+
+table tbody{
+    color:green;
+    background-color:yellowgreen;
 }
