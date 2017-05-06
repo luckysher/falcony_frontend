@@ -1,0 +1,28 @@
+<div class="container" style="font-family:fontawesome;">
+    <div ng-include="'menubar/menubar.html'"></div>
+
+    <!--If any product available -->
+    <div ng-if="products" class="product">
+        <h4>Available Products</h4>
+        <table class="table table-hover">
+            <thead class="thead-inverse">
+                <tr><th>#</th><th>Name of Product</th><th>Manufacturer</th><th>Quantity available</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!--if empty json then Display no registered products-->
+                    <td colspan="6" ng-if="isEmpty(products)" align="center" style="color:red;background-color:powderblue;">You have not added any products yet.,,</td>
+                </tr>
+                <!-- else list all products -->
+                <tr class="table-success" ng-repeat="product in products">
+                    <td>{{ $index+1 }}</td>
+                    <td>{{ product.name }}</td>
+                    <td><span ng-repeat="manufacturer in product.manufacturers">{{ manufacturer }}<span ng-if="!$last">, </span></span></td>
+                    <td>{{ product.quantity }}</td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
